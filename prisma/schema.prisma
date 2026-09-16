@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Order {
+  id             String   @id @default(cuid())
+  trackingNumber String   @unique
+  customerName   String
+  whatsapp       String
+  province       String
+  city           String
+  address        String
+  quantity       Int
+  totalPrice     Int
+  paymentMethod  String
+  status         String   @default("PENDING")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model CmsContent {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+}
